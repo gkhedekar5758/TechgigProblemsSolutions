@@ -53,6 +53,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalindromFinder", "Palindro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeGame-Allscript2021", "PrimeGame-Allscript2021\PrimeGame-Allscript2021.csproj", "{C582D7F4-D8AD-4860-835E-1EE6E346442B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArmyVsAliens", "ArmyVsAliens\ArmyVsAliens.csproj", "{1C3ED40D-89D1-4C93-ACEA-0C25E3C78A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChantuBantu", "ChantuBantu\ChantuBantu.csproj", "{F4EAC6FB-7550-44E0-80F0-2BF2A6045D42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +163,14 @@ Global
 		{C582D7F4-D8AD-4860-835E-1EE6E346442B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C582D7F4-D8AD-4860-835E-1EE6E346442B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C582D7F4-D8AD-4860-835E-1EE6E346442B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3ED40D-89D1-4C93-ACEA-0C25E3C78A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3ED40D-89D1-4C93-ACEA-0C25E3C78A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3ED40D-89D1-4C93-ACEA-0C25E3C78A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3ED40D-89D1-4C93-ACEA-0C25E3C78A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4EAC6FB-7550-44E0-80F0-2BF2A6045D42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4EAC6FB-7550-44E0-80F0-2BF2A6045D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4EAC6FB-7550-44E0-80F0-2BF2A6045D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4EAC6FB-7550-44E0-80F0-2BF2A6045D42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
