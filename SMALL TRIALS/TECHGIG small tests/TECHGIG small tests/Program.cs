@@ -347,6 +347,7 @@ namespace TECHGIG_small_tests
             int dTarget = -15;
             // closestSumPair(d1, d2, dTarget) should return {-16, 2}, {-9, -7}
 
+            //*********************AMAZON***************************//
             //find max in K window
             Console.WriteLine();
             int[] arr = { 1, 2, 3, 1, 4, 5, 2, 3, 6 };
@@ -368,7 +369,174 @@ namespace TECHGIG_small_tests
             string txt = "AABAACAADAABAABA";
             string ptrn = "ABA";
             FindAllOccuranceInTXT(txt, ptrn);
+
+            Console.WriteLine();
+            //find all the anagram of the pattern in the text
+            string text = "AAABABAA";
+            string pat = "AABA";
+
+            FindAnagramOfPatternInText(text, pat);
+            Console.WriteLine();
+
+            //find all the pattern anggram in text with minimum length
+            string texts = "thisisteststring";
+            string patt = "tist";
+            Console.WriteLine("The min length is :"+FindMinSubstring(texts,patt));
+
+            //find the min STEP TO REACH AT TOP
+            Console.WriteLine();
+            int[] start = { 1, 30,30,31,32,35};
+            int[] end = { 30,31,32,32,35,-1 };
+            Console.WriteLine("Min step needed to reach at top : "+MinStepNeededToReachAtTop(start,end));
             Console.ReadLine();
+        }
+
+        private static int MinStepNeededToReachAtTop(int[] start, int[] end)
+        {
+            #region workingfornormal
+            //int totalStep = 1;
+            //int lowestStep = start.Min();
+            //int indexOfLow = BinarySearchMethodReturnIndex(start, lowestStep, 0, start.Length);
+
+            //while (end[indexOfLow]!=-1)
+            //{
+            //    int highValue = end[indexOfLow];
+            //    indexOfLow = BinarySearchMethodReturnIndex(start, highValue, 0, start.Length);
+            //    totalStep++;
+            //}
+
+            //return totalStep-1;
+            #endregion
+
+            #region trial2
+            int totalStep = 1;
+            int lowestStep = start.Min();
+            int indexOfLow = BinarySearchMethodReturnIndex(start, lowestStep, 0, start.Length);
+
+            int highValue = end[indexOfLow];
+
+            while (highValue != -1)
+            {
+                
+                indexOfLow = BinarySearchMethodReturnIndex(start, highValue, 0, start.Length);
+                highValue = end[indexOfLow];
+                totalStep++;
+            }
+
+            return totalStep - 1;
+            #endregion
+        }
+
+        private static int BinarySearchMethodReturnIndex(int[] start, int value, int low, int high)
+        {
+            int mid = 0;
+            if (high > low)
+                mid = low + (high - low) / 2;
+
+            if (start[mid] == value)
+                return mid;
+
+            if (start[mid] > value)
+                return BinarySearchMethodReturnIndex(start, value, low, mid);
+            else if(start[mid] <= value)
+                return BinarySearchMethodReturnIndex(start, value, mid, high);
+            else
+                return -1;
+
+        }
+
+        private static string FindMinSubstring(string texts, string patt)
+        {
+            int noOfTotalChars = 256;
+            int lengthOfPattern = patt.Length;
+            int lengthOfText = texts.Length;
+
+            if (lengthOfPattern > lengthOfText)
+                return "Not Found";
+
+            int[] charArrayofPattern = new int[noOfTotalChars];
+            int[] charArrayofText = new int[noOfTotalChars];
+
+            for (int i = 0; i < lengthOfPattern; i++)
+            {
+                charArrayofPattern[patt[i]]++;
+            }
+
+            int start = 0, startIndex = -1, minLength = int.MaxValue, Count = 0;
+
+            for (int i = 0; i < lengthOfText; i++)
+            {
+                charArrayofText[texts[i]]++;
+                if (charArrayofText[texts[i]] <= charArrayofPattern[texts[i]])
+                    Count++;
+
+                if(Count==lengthOfPattern)
+                {
+                    while (charArrayofText[texts[start]]>charArrayofPattern[texts[start]] || charArrayofPattern[texts[start]]==0)
+                    {
+                        if (charArrayofText[texts[start]] > charArrayofPattern[texts[start]])
+                            charArrayofText[texts[start]]--;
+
+                        start++;
+                    }
+
+                    int lengthOfWindow = i - start + 1;
+                    if(minLength>lengthOfWindow)
+                    {
+                        minLength = lengthOfWindow;
+                        startIndex = start;
+                    }
+                }
+            }
+            if (startIndex == -1)
+                return "notFound";
+
+            return texts.Substring(startIndex,minLength);
+        }
+
+        private static void FindAnagramOfPatternInText(string text, string pat)
+        {
+            
+            int patternLength = pat.Length;
+            int textLength = text.Length;
+            var dicOfLetterAndFrequencyInPattern = FindFrequency(pat);
+
+            int LeftPointer = 0;
+            while (LeftPointer+patternLength<=textLength)
+            {
+                bool notFound = false;
+                var dictOfLetterAndFrequencyInTextPart = FindFrequency(text.Substring(LeftPointer, patternLength));
+                if(dicOfLetterAndFrequencyInPattern.Count== dictOfLetterAndFrequencyInTextPart.Count)
+                {
+                    foreach (var key in dicOfLetterAndFrequencyInPattern.Keys)
+                    {
+                        if ((!dictOfLetterAndFrequencyInTextPart.ContainsKey(key)
+                            || dictOfLetterAndFrequencyInTextPart[key] != dicOfLetterAndFrequencyInPattern[key])
+                            && !notFound)
+                        {
+                            notFound = true;
+                            break;
+                        }
+                            
+                    }
+                    if(!notFound)
+                        Console.WriteLine("Anagram found at :"+LeftPointer);
+                }
+                LeftPointer++;
+            }
+        }
+
+        private static Dictionary<char,int> FindFrequency(string pat)
+        {
+            Dictionary<char, int> dict = new Dictionary<char, int>();
+            for (int i = 0; i < pat.Length; i++)
+            {
+                if (dict.ContainsKey(pat[i]))
+                    dict[pat[i]]++;
+                else
+                    dict[pat[i]] = 1;
+            }
+            return dict;
         }
 
         private static void FindAllOccuranceInTXT(string txt, string ptrn)
